@@ -68,23 +68,42 @@
         android:id="@+id/spinnerPolicy"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:animateLayoutChanges="true"
+
         app:layout_constraintBottom_toTopOf="@+id/policyListView"
         app:layout_constraintEnd_toStartOf="@+id/spinnerLocal"
-        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintHorizontal_bias="0.744"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextSearch"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintTop_toBottomOf="@+id/fillter"
+        app:layout_constraintVertical_bias="0.171" />
 
     <Spinner
         android:id="@+id/spinnerLocal"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toTopOf="@+id/policyListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.782"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fillter"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <TextView
+        android:id="@+id/fillter"
+        android:layout_width="121dp"
+        android:layout_height="37dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:gravity="center"
+        android:text="필터"
+        app:layout_constraintBottom_toTopOf="@+id/policyListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextSearch"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.049" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
