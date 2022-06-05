@@ -68,8 +68,8 @@
         android:id="@+id/spinnerPolicy"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:animateLayoutChanges="true"
+        android:visibility="gone"
 
         app:layout_constraintBottom_toTopOf="@+id/policyListView"
         app:layout_constraintEnd_toStartOf="@+id/spinnerLocal"

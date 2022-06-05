@@ -67,7 +67,7 @@ public class Policy_List extends AppCompatActivity {
         // 지역 선택
         ArrayAdapter<String> localAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_item,Data2);
-        policyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        localAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerLocal.setAdapter(localAdapter);
 
         //스피너 애니메이션
