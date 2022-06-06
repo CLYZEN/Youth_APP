@@ -1,13 +1,17 @@
 package com.example.youthapp;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -105,6 +109,7 @@ public class fragment_moon2 extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = arrayAdapter.getItem(i);
+                dialog();
                 Toast.makeText(getActivity(), item, Toast.LENGTH_SHORT).show();
             }
         });
@@ -118,5 +123,27 @@ public class fragment_moon2 extends Fragment {
         super.onDestroyView();
 
     }
+    public void dialog(){
+
+
+        Dialog dialog=new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.activiy_dialog);
+        dialog.show();
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        Window window = dialog.getWindow();
+        window.setAttributes(lp);
+        Button cancel = dialog.findViewById(R.id.buttonCancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 
 }
