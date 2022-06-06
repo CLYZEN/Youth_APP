@@ -35,16 +35,18 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.navigation_cung:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentCung1).commit();
-                        break;
+                        return true;
                     case R.id.navigation_moon:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentMoon2).commit();
-                        break;
+                        return true;
                     case R.id.navigation_work:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentWork3).commit();
-                        break;
+                        return true;
                     case R.id.navigation_add:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentAdd4).commit();
-                        break;
+                        return true;
+
+
                 }
                 return true;
             }
