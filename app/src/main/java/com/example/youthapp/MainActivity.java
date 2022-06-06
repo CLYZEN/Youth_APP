@@ -1,66 +1,55 @@
 package com.example.youthapp;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.Menu;
+import android.view.MenuItem;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.youthapp.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationBarView;
 
-// 2022 05 28  테스트 2 08:58
+
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
+    fragment_cung1 fragmentCung1;
+    fragment_moon2 fragmentMoon2;
+    fragment_work3 fragmentWork3;
+    fragment_add4 fragmentAdd4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_main);
+        //fragment 정의
+        fragmentCung1 = new fragment_cung1();
+        fragmentMoon2 = new fragment_moon2();
+        fragmentWork3 = new fragment_work3();
+        fragmentAdd4 = new fragment_add4();
+        //처음화면 구성
+        getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentCung1).commit();
+        //바텀 네비게이션 뷰 클릭시 이동
+        NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationview);
+        navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.navigation_cung:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentCung1).commit();
+                        break;
+                    case R.id.navigation_moon:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentMoon2).commit();
+                        break;
+                    case R.id.navigation_work:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentWork3).commit();
+                        break;
+                    case R.id.navigation_add:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, fragmentAdd4).commit();
+                        break;
+                }
+                return true;
             }
         });
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setOpenableLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 }

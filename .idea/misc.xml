@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/font/font.xml" value="0.3212962962962963" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/activity_main.xml" value="0.16590678824721378" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/activity_main_content.xml" value="0.16590678824721378" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/fragment_add4.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/fragment_cung1.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/fragment_moon2.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/layout/fragment_work3.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/menu/activity_main_drawer.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/menu/main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/Windows10/StudioProjects/Youth_APP/app/src/main/res/menu/menu_bottom.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/activity_main_content.xml" value="0.2390625" />
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/activity_policy_list.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/activity_select.xml" value="0.24592391304347827" />
