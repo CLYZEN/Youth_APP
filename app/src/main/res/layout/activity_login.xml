@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,10 +26,11 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="25dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
         <EditText
-            android:id="@+id/editID"
+            android:id="@+id/ed_pass"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -37,7 +39,8 @@
             android:ems="10"
             android:hint="  아이디"
             android:inputType="textPersonName"
-            android:text="" />
+
+            />
 
         <EditText
             android:id="@+id/ediPassword"
@@ -47,10 +50,13 @@
             android:background="@drawable/border"
             android:ems="10"
             android:hint="  비밀번호"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/et_id"
+            app:layout_constraintStart_toStartOf="@+id/et_id"
+            app:layout_constraintTop_toBottomOf="@+id/et_id"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginbutton"
+            android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -62,7 +68,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewSignUp"
+            android:id="@+id/signin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -72,19 +78,6 @@
             android:textSize="13dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/logintext"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center_horizontal"
-            android:text="다른 계정으로 로그인"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -92,29 +85,7 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/kakaoButton"
-                android:layout_width="0dp"
-                android:background="#fff"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/kakao"/>
 
-            <ImageButton
-                android:id="@+id/naverButton"
-                android:layout_width="0dp"
-                android:background="#fff"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/naver"/>
-
-            <ImageButton
-                android:id="@+id/googleButton"
-                android:layout_width="0dp"
-                android:background="#fff"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/google" />
         </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
