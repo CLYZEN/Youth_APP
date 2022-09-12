@@ -12,14 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:ems="10"
         android:hint="아이디"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,6 +33,17 @@
         app:layout_constraintEnd_toEndOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintTop_toBottomOf="@+id/et_id" />
+    <EditText
+        android:id="@+id/et_passk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="비밀번호확인"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_pass"
+        app:layout_constraintStart_toStartOf="@+id/et_pass"
+        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
     <EditText
         android:id="@+id/et_name"
@@ -43,9 +53,10 @@
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/et_pass"
-        app:layout_constraintStart_toStartOf="@+id/et_pass"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
+        app:layout_constraintEnd_toEndOf="@+id/et_passk"
+        app:layout_constraintStart_toStartOf="@+id/et_passk"
+        app:layout_constraintTop_toBottomOf="@+id/et_passk" />
+
 
     <EditText
         android:id="@+id/et_age"
@@ -58,7 +69,29 @@
         app:layout_constraintEnd_toEndOf="@+id/et_name"
         app:layout_constraintStart_toStartOf="@+id/et_name"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
+    <EditText
+        android:id="@+id/et_live"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="거주지"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="@+id/et_age"
+        app:layout_constraintStart_toStartOf="@+id/et_age"
+        app:layout_constraintTop_toBottomOf="@+id/et_age" />
 
+    <Button
+        android:id="@+id/validateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:text="중복확인"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/et_id"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228" />
 
     <Button
         android:id="@+id/btn_register"
@@ -66,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="회원가입"
-        app:layout_constraintEnd_toEndOf="@+id/et_age"
-        app:layout_constraintStart_toStartOf="@+id/et_age"
-        app:layout_constraintTop_toBottomOf="@+id/et_age" />
+        app:layout_constraintEnd_toEndOf="@+id/et_live"
+        app:layout_constraintStart_toStartOf="@+id/et_live"
+        app:layout_constraintTop_toBottomOf="@+id/et_live" />
 </androidx.constraintlayout.widget.ConstraintLayout>
