@@ -4,7 +4,7 @@ import com.tickaroo.tikxml.annotation.PropertyElement;
 import com.tickaroo.tikxml.annotation.Xml;
 
 @Xml(name = "dhsOpenEmpInfo")
-public class ShowWork {
+public class  ShowWork {
     @PropertyElement
     private String empBusiNm;
     @PropertyElement

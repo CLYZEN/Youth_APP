@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     fragment_moon2 fragmentMoon2;
     fragment_work3 fragmentWork3;
     fragment_add4 fragmentAdd4;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

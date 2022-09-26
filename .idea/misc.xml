@@ -22,19 +22,29 @@
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/fragment_home.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/fragment_slideshow.xml" value="0.24592391304347827" />
         <entry key="..\:/Users/jimun/AndroidStudioProjects/youthapp/app/src/main/res/layout/nav_header_main.xml" value="0.24592391304347827" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/activity_content.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_main_content.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_member_info.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/activity_miancontent.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/activity_policy_list.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.2006340579710145" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_web_view.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/activiy_dialog.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.2006340579710145" />
+        <entry key="app/src/main/res/layout/culture_dialog_item_list.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/custom_culture_dialog.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_add4.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_cung1.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/layout/fragment_moon2.xml" value="0.14010416666666667" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.14010416666666667" />
+        <entry key="app/src/main/res/layout/fragment_work3.xml" value="0.15520833333333334" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.15520833333333334" />
         <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.14010416666666667" />
       </map>
     </option>
