@@ -2,6 +2,7 @@ package com.example.youthapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_id, et_pass, et_name, et_age, et_live;
-    private Button btn_register, validateButton;
+    private Button btn_register;
     private AlertDialog dialog;
     private boolean validate = false;
 
@@ -34,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_name = findViewById(R.id.et_name);
         et_age = findViewById(R.id.et_age);
         et_live = findViewById(R.id.et_live);
-        btn_register.findViewById(R.id.btn_register);
+        btn_register = findViewById(R.id.btn_register);
         //회원가입 버튼 클릭 시 수행
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,24 +47,21 @@ public class RegisterActivity extends AppCompatActivity {
                 int userAge = Integer.parseInt(et_age.getText().toString());
                 int userLive = Integer.parseInt(et_live.getText().toString());
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if (success) { //회원등록에 성공
-                                Toast.makeText(getApplicationContext(), "회원 등록 성공!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                            } else { //회원등록에 실패
-                                Toast.makeText(getApplicationContext(), "회원 등록 실패!", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                Response.Listener<String> responseListener = response -> {
+                    try {
+                        Log.d("response",""+response);
+                        JSONObject jsonObject = new JSONObject(response);
+                        boolean success = jsonObject.getBoolean("success");
+                        if (success) { //회원등록에 성공
+                            Toast.makeText(getApplicationContext(), "회원 등록 성공!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        } else { //회원등록에 실패
+                            Toast.makeText(getApplicationContext(), "회원 등록 실패!", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 };
 
