@@ -17,6 +17,7 @@
             android:layout_height="70dp"
             android:layout_weight="1"
             android:scaleType="fitXY"
+            android:layout_marginLeft="5dp"
             android:paddingVertical="15dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -26,7 +27,6 @@
             android:layout_weight="1"
             android:gravity="center"
             android:paddingLeft="5dp"
-
             android:orientation="vertical">
 
             <TextView
@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:layout_marginRight="5dp"
                 android:textColor="#6AABCF"
                 android:textStyle="bold" />
 
