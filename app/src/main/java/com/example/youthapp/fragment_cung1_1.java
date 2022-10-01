@@ -1,17 +1,21 @@
 package com.example.youthapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.youthapp.Adapter.PolicyAdapter;
 import com.example.youthapp.Adapter.ScreenSlidePagerAdapter;
@@ -43,18 +47,31 @@ public class fragment_cung1_1 extends Fragment {
 
 
     private String policyType;
-
+    private String policyLocal="";
 
     public fragment_cung1_1(String policyType) {
         this.policyType = policyType;
+        Log.d("필터미적용프래그먼트",policyType);
+
     }
 
+    public fragment_cung1_1(String policyType, String policyLocal){
+        this.policyType = policyType;
+        this.policyLocal = policyLocal;
+        Log.d("필터적용프래그먼트",policyLocal+" and "+policyType);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,19 +79,24 @@ public class fragment_cung1_1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cung1_1, container, false);
         recyclerView = view.findViewById(R.id.policyRecyclerView);
+
+
         return  view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getPolicyTitles(policyType);
+        getPolicyTitles(policyType, policyLocal);
+
+
+
     }
 
-    public void getPolicyTitles(String policyType) {
+    public void getPolicyTitles(String policyType, String policyLocal) {
 
         PolicyService policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle(policyType,"");
+        call = policyService.getPolicyTitle(policyType, policyLocal,"");
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
@@ -101,4 +123,6 @@ public class fragment_cung1_1 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(policyAdapter);
     }
+
+
 }

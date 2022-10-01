@@ -13,5 +13,6 @@ import retrofit2.http.Query;
 
 public interface PolicyService {
     @GET("/opi/empList.do?openApiVlak=b085acc02467eae4262a16d2&display=100")
-    Call<EmpsInfo> getPolicyTitle(@Query("bizTycdSel") String policyType, @Query("query") String query);
+    Call<EmpsInfo> getPolicyTitle(@Query("bizTycdSel") String policyType, @Query("srchPolyBizSecd") String local,
+                                  @Query("query") String query);
 }

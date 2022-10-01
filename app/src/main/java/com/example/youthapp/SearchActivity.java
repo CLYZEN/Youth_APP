@@ -26,6 +26,8 @@ public class SearchActivity extends AppCompatActivity {
     Call<EmpsInfo> call;
     RecyclerView recyclerView;
     PolicyAdapter policyAdapter;
+    String LocalDataCode;
+    String LocalDataString;
     String query;
     TextView searchResult;
     @Override
@@ -35,16 +37,19 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.searchRecyClerView);
         searchResult = findViewById(R.id.searchResultTextView);
         Intent intent = getIntent();
+        LocalDataCode = intent.getStringExtra("LocalDataCode");
+        LocalDataString = intent.getStringExtra("LocalDataString");
         query = intent.getStringExtra("query");
-        searchResult.setText("'"+query+"'"+" 검색결과 ");
-        getPolicyTitles(query);
+
+        searchResult.setText("'" + query + "'" + " 검색결과 " + "\n" + "'" + LocalDataString + "'" + " 선택지역 ");
+        getPolicyTitles(LocalDataCode, query);
 
     }
 
-    public void getPolicyTitles(String query) {
+    public void getPolicyTitles(String LocalDataCode, String query) {
 
         PolicyService policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle("",query);
+        call = policyService.getPolicyTitle("",LocalDataCode,query);
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
