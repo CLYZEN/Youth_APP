@@ -2,13 +2,18 @@ package com.example.youthapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -16,6 +21,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.youthapp.Adapter.PolicyAdapter;
 import com.example.youthapp.Adapter.ScreenSlidePagerAdapter;
+import com.example.youthapp.Dialog.FilterDialog;
 import com.example.youthapp.PolicyModel.Emp;
 import com.example.youthapp.PolicyModel.EmpsInfo;
 import com.example.youthapp.Service.PolicyService;
@@ -33,10 +39,21 @@ import retrofit2.Response;
 public class fragment_cung1 extends Fragment {
 
     SearchView searchView;
+    ImageView searchFilter;
     TabLayout tabLayout;
     ViewPager2 pager;
     ScreenSlidePagerAdapter pagerAdapter;
     ArrayList<Fragment> fragmentArrayList;
+
+    String LocalDataCode;
+    String LocalDataString;
+
+
+
+
+
+
+
 
 
     Fragment fragment0, fragment1, fragment2, fragment3;
@@ -49,16 +66,8 @@ public class fragment_cung1 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_cung1, container, false);
 
 
-        return view;
-
-    }
-
-
-
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         searchView = view.findViewById(R.id.searchView);
+        searchFilter = view.findViewById(R.id.searchFilter);
         tabLayout = view.findViewById(R.id.tabLayout);
 
         fragmentArrayList = new ArrayList<>();
@@ -66,19 +75,33 @@ public class fragment_cung1 extends Fragment {
         fragmentArrayList.add(new fragment_cung1_1("004004"));
         fragmentArrayList.add(new fragment_cung1_1("004001"));
         fragmentArrayList.add(new fragment_cung1_1("004002,004005,004006"));
-
+        Log.d("fragUnChanged",""+fragmentArrayList.toString());
         pager = view.findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(this,fragmentArrayList);
+        pagerAdapter = new ScreenSlidePagerAdapter(getActivity(),fragmentArrayList);
         pager.setAdapter(pagerAdapter);
-        String tabName[] = new String[]{
-          "주거·금융", "생활·복지", "취업지원", "기타"
-        };
+
+        return view;
+
+    }
+
+
+
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+
+
+
         //검색 기능
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Intent intent = new Intent(view.getContext(), SearchActivity.class);
-                intent.putExtra("query",query);
+                intent.putExtra("query", query);
+                intent.putExtra("LocalDataCode", LocalDataCode);
+                intent.putExtra("LocalDataString", LocalDataString);
                 startActivity(intent);
                 return true;
             }
@@ -89,6 +112,42 @@ public class fragment_cung1 extends Fragment {
             }
         });
 
+        //검색필터
+        searchFilter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                FilterDialog filterDialog =  new FilterDialog();
+                //
+                filterDialog.setFilterListener(new FilterDialog.FilterDialogListener() {
+                            @Override
+                            public void onLoadLocalData(ArrayList<Fragment> fragmentArrayList, String LocalDataCode, String LocalDataString) {
+                                //뷰페이저 어댑터를 새로 생성
+                                pagerAdapter = new ScreenSlidePagerAdapter(getActivity(),fragmentArrayList);
+                                pager.setAdapter(pagerAdapter);
+                                setLocalDataCode(LocalDataCode);    //지역코드 저장
+                                setLocalDataString(LocalDataString);    //지역이름 저장
+
+
+                                /* 뷰페이저 어댑터 갱신 (오류)
+                                pagerAdapter.setFragmentArrayList(fragmentArrayList);
+                                pagerAdapter.notifyItemRangeChanged(0,pagerAdapter.getItemCount());
+                                */
+
+
+
+                            }
+                        });
+               filterDialog.show(getChildFragmentManager(),"");
+
+            }
+        });
+
+
+
+
+        //탭 레이아웃
+        String tabName[] = new String[]{"주거·금융", "생활·복지", "취업지원", "기타"};
         new TabLayoutMediator(tabLayout, pager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
@@ -142,20 +201,19 @@ public class fragment_cung1 extends Fragment {
                 "충북","충남","전북","전남","경북","경남","제주","세종"};
 
 
-
-    }
-
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
     }
 
 
 
 
+
+    public void setLocalDataCode(String localDataCode) {
+        LocalDataCode = localDataCode;
+    }
+
+    public void setLocalDataString(String localDataString) {
+        LocalDataString = localDataString;
+    }
 
 
 }
