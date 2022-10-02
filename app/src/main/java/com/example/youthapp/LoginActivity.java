@@ -1,8 +1,10 @@
 package com.example.youthapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText et_id, et_pass;
+    private EditText et_id, et_pass, et_live_big, et_live_small;
     private Button btn_login,btn_register;
 
     @Override
@@ -26,8 +28,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+         View view = inflater.inflate(R.layout.activity_register, null);
+
         et_id=findViewById(R.id.et_id);
         et_pass=findViewById(R.id.et_pass);
+        et_live_big=view.findViewById(R.id.et_live_big);
+        et_live_small=view.findViewById(R.id.et_live_small);
         btn_login=findViewById(R.id.btn_login);
         btn_register=findViewById(R.id.btn_register);
 
@@ -45,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
+                String userLiveBig = et_live_big.getText().toString();
+                String userLiveSmall = et_live_small.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -61,6 +70,11 @@ public class LoginActivity extends AppCompatActivity {
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID", userID); // MainActivity로 넘겨줄 정보
                                 intent.putExtra("userPass", userPass); // MainActivity로 넘겨줄 정보
+                                intent.putExtra("userLiveBig", userLiveBig); // MainActivity로 넘겨줄 정보
+                                intent.putExtra("userLiveSmall", userLiveSmall); // MainActivity로 넘겨줄 정보
+
+
+
                                 startActivity(intent);
                             } else { //로그인에 실패
                                 Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_SHORT).show();
@@ -71,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
-                LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
+                LoginRequest loginRequest = new LoginRequest(userID, userPass, userLiveBig, userLiveSmall, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
 

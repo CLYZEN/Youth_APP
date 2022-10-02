@@ -13,12 +13,15 @@ public class LoginRequest extends StringRequest {
     final static  private String URL="http://jimuny01.dothome.co.kr/Login.php";
     private Map<String,String>map;
 
-    public LoginRequest(String userID, String userPassword, Response.Listener<String>listener){
+    public LoginRequest(String userID, String userPassword, String userLiveBig, String userLiveSmall, Response.Listener<String>listener){
         super(Method.POST,URL,listener,null);//위 URL에 POST방식으로 값을 전송
 
         map = new HashMap<>();
         map.put("userID",userID);
         map.put("userPassword",userPassword);
+        map.put("userLiveBig",userLiveBig);
+        map.put("userLiveSmall",userLiveSmall);
+
     }
 
     @Override
