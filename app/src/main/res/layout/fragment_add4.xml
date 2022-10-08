@@ -6,9 +6,9 @@
     tools:context=".fragment_add4">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/add4_listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="더보기(메뉴)" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
