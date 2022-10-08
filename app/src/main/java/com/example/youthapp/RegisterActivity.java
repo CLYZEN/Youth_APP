@@ -19,7 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText et_id, et_pass, et_name, et_age, et_live;
+    private EditText et_id, et_pass, et_name, et_age, et_live_big, et_live_small;
     private Button btn_register;
     private AlertDialog dialog;
     private boolean validate = false;
@@ -34,7 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
         et_pass = findViewById(R.id.et_pass);
         et_name = findViewById(R.id.et_name);
         et_age = findViewById(R.id.et_age);
-        et_live = findViewById(R.id.et_live);
+        et_live_big = findViewById(R.id.et_live_big);
+        et_live_small = findViewById(R.id.et_live_big);
+
         btn_register = findViewById(R.id.btn_register);
         //회원가입 버튼 클릭 시 수행
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -44,8 +46,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
                 String userName = et_name.getText().toString();
+                String userLiveBig = et_live_big.getText().toString();
+                String userLiveSmall = et_live_small.getText().toString();
                 int userAge = Integer.parseInt(et_age.getText().toString());
-                int userLive = Integer.parseInt(et_live.getText().toString());
 
                 Response.Listener<String> responseListener = response -> {
                     try {
@@ -65,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-                RegisterRequest registerRequest = new RegisterRequest(userID, userPass, userName, userAge, userLive, responseListener);
+                RegisterRequest registerRequest = new RegisterRequest(userID, userPass, userName, userLiveBig, userLiveSmall, userAge, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 queue.add(registerRequest);
             }
