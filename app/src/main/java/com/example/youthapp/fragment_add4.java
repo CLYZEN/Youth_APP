@@ -33,10 +33,10 @@ public class fragment_add4 extends Fragment {
                     case 0: Intent intent_0 = new Intent(getActivity(), add4_1.class);
                         startActivity(intent_0);
                         break;
-                    case 1: Intent intent_1 = new Intent(getActivity(), add4_2.class);
+                    case 1: Intent intent_1 = new Intent(getActivity(), fragment_add4_mylist.class);
                         startActivity(intent_1);
                         break;
-                    case 2: Intent intent_2 = new Intent(getActivity(), add4_3.class);
+                    case 2: Intent intent_2 = new Intent(getActivity(), fragment_add4_notice.class);
                         startActivity(intent_2);
                         break;
                     case 3: Intent intent_3 = new Intent(getActivity(), add4_4.class);
