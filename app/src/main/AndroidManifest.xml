@@ -19,9 +19,11 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
          <activity android:name=".MainActivity"
          android:exported="false">
          </activity>
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -31,15 +33,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MemberInfoActivity"
             android:exported="false" />
+
         <activity
             android:name=".SelectActivity"
             android:exported="false" />
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
+
+        <activity android:name=".WebViewActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>

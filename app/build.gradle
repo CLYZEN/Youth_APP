@@ -70,4 +70,13 @@ dependencies {
     //glide(이미지 로더)
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    //workManger(백그라운드)
+    def work_version = "2.7.1"
+    implementation "androidx.work:work-runtime:$work_version"
+
+    //RoomDataBase(데이터베이스)
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 }

@@ -1,13 +1,33 @@
 package com.example.youthapp;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.work.Data;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
+import com.example.youthapp.PolicyModel.Emp;
+import com.example.youthapp.PolicyModel.EmpsInfo;
+import com.example.youthapp.Service.PolicyService;
+import com.example.youthapp.Service.RetrofitInstance;
+import com.example.youthapp.Service.ServiceWorker;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class MainActivity extends FragmentActivity {//AppCompatActivity
@@ -35,26 +55,20 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //viewpager2 생성
-        /*
-        fragmentArrayList = new ArrayList<>();
-        fragmentArrayList.add(fragmentCung1);
-        fragmentArrayList.add(fragmentMoon2);
-        fragmentArrayList.add(fragmentWork3);
-        fragmentArrayList.add(fragmentAdd4);
-        */
-
-        /*
-        viewPager2 = findViewById(R.id.pager);
-        pagerAdapter = new ScreenSlidePagerAdapter(this,fragmentArrayList);
-        viewPager2.setAdapter(pagerAdapter);
-        */
-
-        fragmentManager = getSupportFragmentManager();
+        // LoginActivity로부터 지역정보 받아오기
+        String userLiveBig = getIntent().getStringExtra("userLiveBig");
+        String userLiveSmall = getIntent().getStringExtra("userLiveSmall");
 
         //처음화면 구성
+        fragmentManager = getSupportFragmentManager();
         fragmentCung1 = new fragment_cung1();
         fragmentManager.beginTransaction().replace(R.id.containers, fragmentCung1).commit();
+
+        // fragmentCung1로 지역정보 전달
+        Bundle bundle = new Bundle();
+        bundle.putString("userLiveBig", userLiveBig);
+        fragmentCung1.setArguments(bundle);
+
 
         //바텀 네비게이션 뷰 클릭시 이동
         NavigationBarView navigationBarView = findViewById(R.id.bottom_navigationview);
@@ -70,6 +84,7 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
                             fragmentManager.beginTransaction().add(R.id.containers, fragmentCung1).commit();
                         }
 
+                        // 프래그먼트 화면 전환 시 데이터 유지
                         if (fragmentCung1 != null)
                             fragmentManager.beginTransaction().show(fragmentCung1).commit();
                         if (fragmentMoon2 != null)
@@ -78,9 +93,6 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
                             fragmentManager.beginTransaction().hide(fragmentWork3).commit();
                         if (fragmentAdd4 != null)
                             fragmentManager.beginTransaction().hide(fragmentAdd4).commit();
-
-
-
                         return true;
 
                     case R.id.navigation_moon:
@@ -136,14 +148,11 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
             }//onNavigationItemSelected
         });//setOnItemSelectedListener
 
-        //뷰페이지 전환에 따른 메뉴 아이템 체크
-//        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                super.onPageSelected(position);
-//                navigationBarView.getMenu().getItem(position).setChecked(true);
-//            }
-//        });
+
+        // 시스템에 백그라운드 처리 등록
+       WorkRequest serviceWorkRequest = new PeriodicWorkRequest.Builder(ServiceWorker.class, 1, TimeUnit.HOURS)
+                .build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(serviceWorkRequest);
 
 
 

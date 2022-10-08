@@ -3,12 +3,15 @@ package com.example.youthapp.Dialog;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
 
 
 import com.example.youthapp.PolicyModel.Emp;
+import com.example.youthapp.WebViewActivity;
 
 import java.util.ArrayList;
 
@@ -49,7 +52,14 @@ public class PolicyDialog extends DialogFragment {
 
                     .setPositiveButton("이동하기", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            // START THE GAME!
+                            if (policyContent.getRqutUrla().contains("http")){
+                                Intent intent = new Intent(getContext(), WebViewActivity.class);
+                                intent.putExtra("url",policyContent.getRqutUrla());
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(getContext(), "이동할 사이트가 없습니다.", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     })
                     .setNegativeButton("취소", new DialogInterface.OnClickListener() {
