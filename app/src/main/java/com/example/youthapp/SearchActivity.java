@@ -44,12 +44,13 @@ public class SearchActivity extends AppCompatActivity {
         searchResult.setText("'" + query + "'" + " 검색결과 " + "\n" + "'" + LocalDataString + "'" + " 선택지역 ");
         getPolicyTitles(LocalDataCode, query);
 
+
     }
 
     public void getPolicyTitles(String LocalDataCode, String query) {
 
         PolicyService policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle("",LocalDataCode,query);
+        call = policyService.getPolicyTitle("",LocalDataCode, query, 1);
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {

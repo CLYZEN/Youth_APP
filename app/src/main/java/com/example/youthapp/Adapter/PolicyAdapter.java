@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class PolicyAdapter extends RecyclerView.Adapter<PolicyAdapter.PolicyViewHolder> {
 
+
+
     private ArrayList<Emp> policyList;
     Context context;
     FragmentManager fragmentManager;
@@ -65,5 +67,9 @@ public class PolicyAdapter extends RecyclerView.Adapter<PolicyAdapter.PolicyView
 
         }
 
+    }
+
+    public void addPolicyList(ArrayList<Emp> policyList) {
+        this.policyList.addAll(policyList);
     }
 }

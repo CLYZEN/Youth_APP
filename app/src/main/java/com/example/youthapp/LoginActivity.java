@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         View view = inflater.inflate(R.layout.activity_register, null);
+        View view = inflater.inflate(R.layout.activity_register, null);
 
         et_id=findViewById(R.id.et_id);
         et_pass=findViewById(R.id.et_pass);
@@ -65,17 +65,20 @@ public class LoginActivity extends AppCompatActivity {
                             if (success) { //로그인에 성공
                                 String userID = jsonObject.getString("userID");
                                 String userPass = jsonObject.getString("userPassword");
+                                String userLiveBig = jsonObject.getString("userLiveBig");
+                                String userLiveSmall = jsonObject.getString("userLiveSmall");
 
                                 Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.putExtra("userID", userID); // MainActivity로 넘겨줄 정보
                                 intent.putExtra("userPass", userPass); // MainActivity로 넘겨줄 정보
-                                intent.putExtra("userLiveBig", userLiveBig); // MainActivity로 넘겨줄 정보
-                                intent.putExtra("userLiveSmall", userLiveSmall); // MainActivity로 넘겨줄 정보
-
-
+                                intent.putExtra("userLiveBig",userLiveBig);
+                                intent.putExtra("userLiveSmall",userLiveSmall);
+//                                intent.putExtra("userLiveBig", userLiveBig); // MainActivity로 넘겨줄 정보
+//                                intent.putExtra("userLiveSmall", userLiveSmall); // MainActivity로 넘겨줄 정보
 
                                 startActivity(intent);
+
                             } else { //로그인에 실패
                                 Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_SHORT).show();
                                 return;

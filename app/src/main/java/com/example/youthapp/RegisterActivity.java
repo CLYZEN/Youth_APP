@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_name = findViewById(R.id.et_name);
         et_age = findViewById(R.id.et_age);
         et_live_big = findViewById(R.id.et_live_big);
-        et_live_small = findViewById(R.id.et_live_big);
+        et_live_small = findViewById(R.id.et_live_small);
 
         btn_register = findViewById(R.id.btn_register);
         //회원가입 버튼 클릭 시 수행
