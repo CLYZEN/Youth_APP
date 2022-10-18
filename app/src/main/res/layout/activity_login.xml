@@ -31,25 +31,23 @@
 
         <EditText
             android:id="@+id/et_id"
-            android:layout_width="wrap_content"
+            android:layout_width="312dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/rectangle"
             android:ems="10"
-            android:hint="   아이디"
-            android:inputType="textPersonName"
-
-            />
+            android:drawableLeft="@drawable/ic_id_new"
+            android:hint=" 아이디"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/et_pass"
-            android:layout_width="wrap_content"
+            android:layout_width="312dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
-            android:background="@drawable/rectangle"
             android:ems="10"
-            android:hint="   비밀번호"
+            android:hint=" 비밀번호"
+            android:drawableLeft="@drawable/ic_pwd_new"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="@+id/et_id"
             app:layout_constraintStart_toStartOf="@+id/et_id"
@@ -88,5 +86,6 @@
 
 
         </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

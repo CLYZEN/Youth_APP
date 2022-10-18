@@ -25,7 +25,7 @@ public class fragment_add4 extends Fragment {
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, list);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapterView.getItemAtPosition(i);
@@ -50,7 +50,7 @@ public class fragment_add4 extends Fragment {
                         break;
                 }
             }
-        });
+        });*/
 
 
 
