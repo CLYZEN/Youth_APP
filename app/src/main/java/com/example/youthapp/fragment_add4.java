@@ -1,5 +1,7 @@
 package com.example.youthapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,30 +32,51 @@ public class fragment_add4 extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 adapterView.getItemAtPosition(i);
                 switch (i){
-                    case 0: Intent intent_0 = new Intent(getActivity(), fragment_add4_myinfo.class);
-                        startActivity(intent_0);
+                    case 0: Intent intent_myinfo = new Intent(getActivity(), fragment_add4_myinfo.class);
+                        startActivity(intent_myinfo);
                         break;
-                    case 1: Intent intent_1 = new Intent(getActivity(), fragment_add4_mylist.class);
-                        startActivity(intent_1);
+                    case 1: Intent intent_mylist = new Intent(getActivity(), fragment_add4_mylist.class);
+                        startActivity(intent_mylist);
                         break;
-                    case 2: Intent intent_2 = new Intent(getActivity(), fragment_add4_notice.class);
-                        startActivity(intent_2);
+                    case 2: Intent intent_notice = new Intent(getActivity(), fragment_add4_notice.class);
+                        startActivity(intent_notice);
                         break;
-                    case 3: Intent intent_3 = new Intent(getActivity(), fragment_add4_qna.class);
-                        startActivity(intent_3);
+                    case 3: Intent intent_qna = new Intent(Intent.ACTION_SEND);
+                        intent_qna.setType("plain/text");
+                        String[] email = {"youthapp@gmail.com"};
+                        intent_qna.putExtra(Intent.EXTRA_EMAIL, email);
+                        intent_qna.putExtra(Intent.EXTRA_SUBJECT, "문의 제목: ");
+                        intent_qna.putExtra(Intent.EXTRA_TEXT, "문의 내용: ");
+                        startActivity(intent_qna);
                         break;
-                    case 4: Intent intent_4 = new Intent(getActivity(), fragment_add4_signout.class);
-                        startActivity(intent_4);
+                    case 4: signout();
                         break;
-                    case 5: Intent intent_5 = new Intent(getActivity(), fragment_add4_remove.class);
-                        startActivity(intent_5);
+                    case 5: Intent intent_remove = new Intent(getActivity(), fragment_add4_remove.class);
+                        startActivity(intent_remove);
                         break;
                 }
             }
+            void signout(){
+                AlertDialog builder = new AlertDialog.Builder(getActivity())
+                        .setTitle("Sign out")
+                        .setMessage("로그아웃 하시겠습니까?")
+                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent out = new Intent(getActivity(), LoginActivity.class);
+                                out.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                startActivity(out);
+                            }
+                        })
+                        .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+
+                            }
+                        })
+                        .show();
+            }
         });
-
-
-
 
 
         // Inflate the layout for this fragment
