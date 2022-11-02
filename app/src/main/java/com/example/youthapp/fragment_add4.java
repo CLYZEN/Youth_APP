@@ -39,12 +39,12 @@ public class fragment_add4 extends Fragment {
                     case 2: Intent intent_2 = new Intent(getActivity(), fragment_add4_notice.class);
                         startActivity(intent_2);
                         break;
-                    case 3: Intent intent_3 = new Intent(getActivity(), fragment_add4_qna.class);
-                        startActivity(intent_3);
-                        break;
-                    case 4: Intent intent_4 = new Intent(getActivity(), fragment_add4_signout.class);
-                        startActivity(intent_4);
-                        break;
+//                    case 3: Intent intent_3 = new Intent(getActivity(), fragment_add4_qna.class);
+//                        startActivity(intent_3);
+//                        break;
+//                    case 4: Intent intent_4 = new Intent(getActivity(), fragment_add4_signout.class);
+//                        startActivity(intent_4);
+//                        break;
                     case 5: Intent intent_5 = new Intent(getActivity(), fragment_add4_remove.class);
                         startActivity(intent_5);
                         break;
