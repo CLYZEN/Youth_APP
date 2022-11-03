@@ -53,6 +53,8 @@ public class FilterDialog extends DialogFragment {
                 .setItems(LocalDataString, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
 
+
+
                         // 각각의 지역 정보를 담는 새로운 프래그먼트 3개 생성
                         ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
                         fragmentArrayList.add(new fragment_cung1_1("004003",LocalDataCode[which]));

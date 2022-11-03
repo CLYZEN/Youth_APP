@@ -52,6 +52,7 @@ public class fragment_cung1_1 extends Fragment {
 
     private String policyType;
     private String policyLocal="";
+    private String isCenter;
     private int pageIndex = 1;
     public fragment_cung1_1(String policyType) {
         this.policyType = policyType;
@@ -64,6 +65,8 @@ public class fragment_cung1_1 extends Fragment {
         this.policyLocal = policyLocal;
         Log.d("필터적용프래그먼트",policyLocal+" and "+policyType);
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -155,6 +158,7 @@ public class fragment_cung1_1 extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(policyAdapter);
+
     }
 
 

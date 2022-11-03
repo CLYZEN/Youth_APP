@@ -1,33 +1,26 @@
 package com.example.youthapp;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.work.Data;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
-import com.example.youthapp.PolicyModel.Emp;
-import com.example.youthapp.PolicyModel.EmpsInfo;
-import com.example.youthapp.Service.PolicyService;
-import com.example.youthapp.Service.RetrofitInstance;
+import com.example.youthapp.FragmentAdd.Fragment_add4_myinfo;
+import com.example.youthapp.FragmentAdd.fragment_add4;
 import com.example.youthapp.Service.ServiceWorker;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class MainActivity extends FragmentActivity {//AppCompatActivity
@@ -38,7 +31,7 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
     fragment_add4 fragmentAdd4;
 
     FragmentManager fragmentManager;
-
+    public static WorkRequest workRequest;
 
 
     /*
@@ -58,6 +51,7 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
         // LoginActivity로부터 지역정보 받아오기
         String userLiveBig = getIntent().getStringExtra("userLiveBig");
         String userLiveSmall = getIntent().getStringExtra("userLiveSmall");
+
 
         //처음화면 구성
         fragmentManager = getSupportFragmentManager();
@@ -150,11 +144,29 @@ public class MainActivity extends FragmentActivity {//AppCompatActivity
 
 
         // 시스템에 백그라운드 처리 등록
-       WorkRequest serviceWorkRequest = new PeriodicWorkRequest.Builder(ServiceWorker.class, 1, TimeUnit.HOURS)
-                .build();
-        WorkManager.getInstance(getApplicationContext()).enqueue(serviceWorkRequest);
+        Boolean alarmCheckState = NotificationManagerCompat.from(getApplicationContext()).areNotificationsEnabled();
+        if (alarmCheckState == true){
+            WorkRequest serviceWorkRequest = new PeriodicWorkRequest.Builder(ServiceWorker.class, 1, TimeUnit.HOURS)
+                    .build();
+            WorkManager.getInstance(getApplicationContext()).enqueue(serviceWorkRequest);
+            Log.d("MainActivity","워크매니저 실행");
+        }
 
 
+
+
+        //FCM 푸시알림
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()){
+                    Log.w("MAINACTIVITY", "토큰 불러오기 실패", task.getException());
+                    return;
+                }
+                String newToken = task.getResult();
+                Log.d("MAINACTIVITY", newToken);
+            }
+        });
 
 
     }//main

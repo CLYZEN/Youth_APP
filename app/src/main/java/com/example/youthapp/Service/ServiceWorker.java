@@ -5,7 +5,9 @@ package com.example.youthapp.Service;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
@@ -19,11 +21,14 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 
+import com.example.youthapp.LoginActivity;
+import com.example.youthapp.MainActivity;
 import com.example.youthapp.PolicyModel.Emp;
 import com.example.youthapp.PolicyModel.EmpsInfo;
 import com.example.youthapp.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,14 +49,19 @@ public class ServiceWorker extends Worker {
         Call<EmpsInfo> call;
 
         PolicyService policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle("","","", 1);
+
+        // 알림 지역 설정 데이터 불러오기
+        SharedPreferences sharedSettingPref = getApplicationContext().getSharedPreferences("alarm_setting_pref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor settingEditor = sharedSettingPref.edit();
+
+        call = policyService.getPolicyTitle("",sharedSettingPref.getString("alarmLocal",""),"", 1);
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
                 EmpsInfo empsInfo = response.body();
                 ArrayList<Emp> emps = (ArrayList<Emp>) empsInfo.getEmp();
 
-                // 정책 개수 데이터베이스 로드
+                // 정책 개수 데이터 불러오기
                 SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("prefCnt", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -66,9 +76,12 @@ public class ServiceWorker extends Worker {
                     editor.putInt("cnt", newTotalCnt);
                     editor.apply();
                     oldTotalCnt = sharedPref.getInt("cnt",0);
-                    Toast.makeText(getApplicationContext(), "앱 최초 실행 totalCnt : " + newTotalCnt + " saved ", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "앱 최초 실행 totalCnt : " + newTotalCnt + " saved ", Toast.LENGTH_SHORT).show();
                     Log.d("WorkTag","oldTotalCnt(앱 최초 실행) : " + oldTotalCnt);
                 }
+
+
+
 
                 // 알람 채널 생성
                 createNotificationChannel();
@@ -90,13 +103,18 @@ public class ServiceWorker extends Worker {
 
 
                     // 상단 알림
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "POLICY")
-                            .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                            .setSmallIcon(R.drawable.logo2)
                             .setContentTitle("YouthApp")
                             .setContentText("신규 정책이 " +newPolicy+ "개 있습니다.\n" + stringBuilder.toString())
                             .setStyle(new NotificationCompat.BigTextStyle())
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setAutoCancel(true)
+                            .setContentIntent(pendingIntent);
                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                     notificationManagerCompat.notify(100,builder.build());
                 }
@@ -138,8 +156,10 @@ public class ServiceWorker extends Worker {
 
             NotificationChannel channel = new NotificationChannel("POLICY", "policy", NotificationManager.IMPORTANCE_DEFAULT);
             channel.setDescription("신규 정책 알림");
+
             NotificationManager notificationManager =  getApplicationContext().getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
+
         }
     }
 }
