@@ -21,9 +21,11 @@ import com.example.youthapp.R;
 
 public class fragment_add4 extends Fragment {
 
-    private String[] settingTitle = {"공지사항", "즐겨찾기","알림 설정", "회원정보 수정", "로그아웃", "회원탈퇴"};
+    private String[] settingTitle = {"알림 설정", "회원정보 수정", "로그아웃", "회원탈퇴"};
     RecyclerView recyclerView;
     SettingAdapter settingAdapter;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

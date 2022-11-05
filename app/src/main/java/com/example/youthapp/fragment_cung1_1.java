@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -38,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class fragment_cung1_1 extends Fragment {
+public class fragment_cung1_1 extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     PolicyService policyService;
@@ -46,7 +47,7 @@ public class fragment_cung1_1 extends Fragment {
     Call<EmpsInfo> call;
     RecyclerView recyclerView;
     PolicyAdapter policyAdapter;
-
+    SwipeRefreshLayout swipeRefreshLayout;
 
 
 
@@ -82,7 +83,7 @@ public class fragment_cung1_1 extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cung1_1, container, false);
         recyclerView = view.findViewById(R.id.policyRecyclerView);
-
+        swipeRefreshLayout = view.findViewById(R.id.swiperefresh);
 
         return  view;
     }
@@ -124,7 +125,15 @@ public class fragment_cung1_1 extends Fragment {
             }
         });// listner
 
-
+        //스와이프 하여 정책 새로고침
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPolicyTitles(policyType, policyLocal, 1);
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity(), "새로고침 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -162,4 +171,8 @@ public class fragment_cung1_1 extends Fragment {
     }
 
 
+    @Override
+    public void onRefresh() {
+
+    }
 }

@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class fragment_moon2 extends Fragment {
+public class fragment_moon2 extends Fragment{
 
     ArrayList<ShowList> showList;
     Call<ShowListRoot> call;

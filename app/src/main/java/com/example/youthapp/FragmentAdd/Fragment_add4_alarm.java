@@ -69,16 +69,17 @@ public class Fragment_add4_alarm extends AppCompatActivity {
             alarmSwitch.setChecked(alarmCheckState);
             textViewLocal.setVisibility(View.VISIBLE);
             spinner.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else {
             alarmSwitch.setChecked(alarmCheckState);
             textViewLocal.setVisibility(View.INVISIBLE);
             spinner.setVisibility(View.INVISIBLE);
-
         }
 
         alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
                 intent.putExtra("android.provider.extra.APP_PACKAGE", getPackageName());

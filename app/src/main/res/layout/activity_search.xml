@@ -14,6 +14,14 @@
         android:text="TextView"
         android:textSize="30sp" />
 
+    <TextView
+        android:id="@+id/textViewNoResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchRecyClerView"
         android:layout_width="match_parent"

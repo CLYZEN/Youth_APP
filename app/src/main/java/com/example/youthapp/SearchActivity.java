@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.youthapp.Adapter.PolicyAdapter;
 import com.example.youthapp.PolicyModel.Emp;
@@ -30,12 +32,14 @@ public class SearchActivity extends AppCompatActivity {
     String LocalDataString;
     String query;
     TextView searchResult;
+    TextView noResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         recyclerView = findViewById(R.id.searchRecyClerView);
         searchResult = findViewById(R.id.searchResultTextView);
+        noResult = findViewById(R.id.textViewNoResult);
         Intent intent = getIntent();
         LocalDataCode = intent.getStringExtra("LocalDataCode");
         LocalDataString = intent.getStringExtra("LocalDataString");
@@ -54,10 +58,18 @@ public class SearchActivity extends AppCompatActivity {
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
-                EmpsInfo empsInfo = response.body();
-                emps = (ArrayList<Emp>) empsInfo.getEmp();
+                if (response.body().getTotalCnt() != 0 ){
+                    EmpsInfo empsInfo = response.body();
+                    emps = (ArrayList<Emp>) empsInfo.getEmp();
 
-                CreateRecyclerView();
+                    CreateRecyclerView();
+                }
+
+                else{
+                    recyclerView.setVisibility(View.GONE);
+                    noResult.setVisibility(View.VISIBLE);
+                    noResult.setText("검색결과 없음");
+                }
 
             }
 

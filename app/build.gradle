@@ -4,16 +4,20 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.youthapp"
         minSdk 26
-        targetSdk 31
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    lintOptions {
+        baseline file("lint-baseline.xml")
     }
 
     buildTypes {
@@ -30,6 +34,7 @@ android {
         viewBinding true
     }
     namespace 'com.example.youthapp'
+    buildToolsVersion '33.0.0'
 }
 
 dependencies {

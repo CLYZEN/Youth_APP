@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.youthapp.Dialog.InfoRemoveDialog;
 import com.example.youthapp.FragmentAdd.Fragment_add4_alarm;
 import com.example.youthapp.FragmentAdd.Fragment_add4_myinfo;
-import com.example.youthapp.Fragment_add4_mylist;
 import com.example.youthapp.Fragment_add4_notice;
 import com.example.youthapp.LoginActivity;
 import com.example.youthapp.R;
@@ -81,10 +80,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
                     fragmentActivity.startActivity(intent);
                 }
 
-                if (viewHolder.textView.getText().toString() == "즐겨찾기"){
-                    intent = new Intent(fragmentActivity, Fragment_add4_mylist.class);
-                    fragmentActivity.startActivity(intent);
-                }
+
 
                 if (viewHolder.textView.getText().toString() == "알림 설정"){
                     intent = new Intent(fragmentActivity, Fragment_add4_alarm.class);
