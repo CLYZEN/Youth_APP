@@ -44,6 +44,8 @@ public class PolicyAdapter extends RecyclerView.Adapter<PolicyAdapter.PolicyView
         this.fragmentManager = fragmentManager;
     }
 
+
+
     @NonNull
     @Override
     public PolicyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -55,13 +57,12 @@ public class PolicyAdapter extends RecyclerView.Adapter<PolicyAdapter.PolicyView
 
     @Override
     public void onBindViewHolder(@NonNull PolicyViewHolder holder, int position) {
+
+
         holder.textView.setText(policyList.get(position).getPolyBizSjnm());
         holder.imageView.setImageResource(R.drawable.star_off);
 
-        if (policyList.get(position).getPolyBizTy() == "중앙부처"){
-            holder.textView.setText(policyList.get(position).getPolyBizSjnm());
-            holder.imageView.setImageResource(R.drawable.star_off);
-        }
+
 
         // 즐겨찾기 데이터 로드
         SharedPreferences sharedPref = context.getSharedPreferences("myListPref", Context.MODE_PRIVATE);

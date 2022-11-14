@@ -214,7 +214,7 @@ public class Fragment_add4_alarm extends AppCompatActivity {
                 }
                 Call<EmpsInfo> call;
                 PolicyService policyService = RetrofitInstance.getPolicyService();
-                call = policyService.getPolicyTitle("",sharedPref.getString("alarmLocal",""),"", 1);
+                call = policyService.getPolicyTitle("",sharedPref.getString("alarmLocal",""),"", 1,"10");
                 call.enqueue(new Callback<EmpsInfo>() {
                     @Override
                     public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youthapp.Dialog.InfoRemoveDialog;
 import com.example.youthapp.FragmentAdd.Fragment_add4_alarm;
+import com.example.youthapp.FragmentAdd.Fragment_add4_alarmList;
 import com.example.youthapp.FragmentAdd.Fragment_add4_myinfo;
 import com.example.youthapp.Fragment_add4_notice;
 import com.example.youthapp.LoginActivity;
@@ -70,10 +71,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
             Intent intent;
             @Override
             public void onClick(View v) {
-                if (viewHolder.textView.getText().toString() == "공지사항"){
-                    intent = new Intent(fragmentActivity, Fragment_add4_notice.class);
-                    fragmentActivity.startActivity(intent);
-                }
+
 
                 if (viewHolder.textView.getText().toString() == "회원정보 수정"){
                     intent = new Intent(fragmentActivity, Fragment_add4_myinfo.class);
@@ -84,6 +82,12 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
 
                 if (viewHolder.textView.getText().toString() == "알림 설정"){
                     intent = new Intent(fragmentActivity, Fragment_add4_alarm.class);
+                    fragmentActivity.startActivity(intent);
+
+                }
+
+                if (viewHolder.textView.getText().toString().contains("알림 목록")){
+                    intent = new Intent(fragmentActivity, Fragment_add4_alarmList.class);
                     fragmentActivity.startActivity(intent);
 
                 }

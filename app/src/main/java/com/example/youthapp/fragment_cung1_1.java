@@ -103,7 +103,7 @@ public class fragment_cung1_1 extends Fragment implements SwipeRefreshLayout.OnR
                     if (!recyclerView.canScrollVertically(1)) {
                         pageIndex += 1;
                         int oldCnt = policyAdapter.getItemCount();
-                        call = policyService.getPolicyTitle(policyType, policyLocal, "", pageIndex);
+                        call = policyService.getPolicyTitle(policyType, policyLocal, "", pageIndex,"100");
                         call.enqueue(new Callback<EmpsInfo>() {
                             @Override
                             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
@@ -142,7 +142,7 @@ public class fragment_cung1_1 extends Fragment implements SwipeRefreshLayout.OnR
 
 
         policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle(policyType, policyLocal, "", pageIndex);
+        call = policyService.getPolicyTitle(policyType, policyLocal, "", pageIndex, "100");
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
@@ -158,13 +158,19 @@ public class fragment_cung1_1 extends Fragment implements SwipeRefreshLayout.OnR
             }
         });
 
-    }
+
+    }//getPolicyTitles
 
     //create RecyclerView
     private void CreateRecyclerView() {
 
+
         policyAdapter = new PolicyAdapter(emps,getActivity(),getActivity().getSupportFragmentManager());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(policyAdapter);
 

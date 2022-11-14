@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.room.Room;
 import androidx.work.WorkManager;
 
 import com.android.volley.AuthFailureError;
@@ -18,6 +19,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.youthapp.DataBase.PolicyDao;
+import com.example.youthapp.DataBase.PolicyDataBase;
 import com.example.youthapp.FragmentAdd.Fragment_add4_myinfo;
 import com.example.youthapp.LoginActivity;
 import com.example.youthapp.R;
@@ -79,6 +82,17 @@ public class InfoRemoveDialog extends DialogFragment {
 
                         //workmanager 해제
                         WorkManager.getInstance(getActivity()).cancelAllWork();
+
+                        //알림 목록 데이터 삭제
+                        PolicyDataBase db = Room.databaseBuilder(getActivity(), PolicyDataBase.class, "PolicyDB").build();
+                        PolicyDao policyDao = db.policyDao();
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                policyDao.deleteAll();
+
+                            }
+                        }).start();
 
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);

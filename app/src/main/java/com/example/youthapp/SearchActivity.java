@@ -54,7 +54,7 @@ public class SearchActivity extends AppCompatActivity {
     public void getPolicyTitles(String LocalDataCode, String query) {
 
         PolicyService policyService = RetrofitInstance.getPolicyService();
-        call = policyService.getPolicyTitle("",LocalDataCode, query, 1);
+        call = policyService.getPolicyTitle("",LocalDataCode, query, 1,"100");
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {

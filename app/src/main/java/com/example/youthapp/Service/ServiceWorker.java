@@ -16,19 +16,26 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.room.Database;
 import androidx.room.Room;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 
+import com.example.youthapp.DataBase.Policy;
+import com.example.youthapp.DataBase.PolicyDao;
+import com.example.youthapp.DataBase.PolicyDataBase;
+import com.example.youthapp.FragmentAdd.Fragment_add4_alarmList;
 import com.example.youthapp.LoginActivity;
 import com.example.youthapp.MainActivity;
 import com.example.youthapp.PolicyModel.Emp;
 import com.example.youthapp.PolicyModel.EmpsInfo;
 import com.example.youthapp.R;
+import com.example.youthapp.SplashActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +61,7 @@ public class ServiceWorker extends Worker {
         SharedPreferences sharedSettingPref = getApplicationContext().getSharedPreferences("alarm_setting_pref", Context.MODE_PRIVATE);
         SharedPreferences.Editor settingEditor = sharedSettingPref.edit();
 
-        call = policyService.getPolicyTitle("",sharedSettingPref.getString("alarmLocal",""),"", 1);
+        call = policyService.getPolicyTitle("",sharedSettingPref.getString("alarmLocal",""),"", 1,"10");
         call.enqueue(new Callback<EmpsInfo>() {
             @Override
             public void onResponse(Call<EmpsInfo> call, Response<EmpsInfo> response) {
@@ -101,14 +108,50 @@ public class ServiceWorker extends Worker {
                         stringBuilder.append("\n");
                     }
 
+                    //신규 알림 알림목록에 저장
+                    PolicyDataBase db = Room.databaseBuilder(getApplicationContext(), PolicyDataBase.class, "PolicyDB").build();
+                    PolicyDao policyDao = db.policyDao();
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            for (int i = 0; i< newPolicy; i++){
+                                Policy policy = new Policy();
+                                Emp policyContent = emps.get(i);
+                                policy.policyTitle = policyContent.getPolyBizSjnm();
+                                policy.policyId = policyContent.getBizId();
+                                policy.policyLink = policyContent.getRqutUrla();
+                                policy.policyContent = "기관 및 지자체 구분 : " + policyContent.getPolyBizTy() + "\n"
+                                        +"정책소개 : "+policyContent.getPolyItcnCn() + "\n"
+                                        +"정책유형 : "+policyContent.getPlcyTpNm() + "\n"
+                                        +"지원규모 : "+policyContent.getSporScvl() + "\n"
+                                        +"지원내용 : "+policyContent.getSporCn() + "\n"
+                                        +"참여요건 - 연령 : "+policyContent.getAgeInfo() + "\n"
+                                        +"참여요건 - 취업상태 : "+policyContent.getEmpmSttsCn() + "\n"
+                                        +"참여요건 - 학력 : "+policyContent.getAccrRqisCn() + "\n"
+                                        +"참여요건 - 전공 : "+policyContent.getMajrRqisCn() + "\n"
+                                        +"참여요건 - 특화분야 : "+policyContent.getSplzRlmRqisCn() + "\n"
+                                        +"신청기관명 : "+policyContent.getCnsgNmor() + "\n"
+                                        +"신청기간 : "+policyContent.getRqutPrdCn() + "\n"
+                                        +"신청절차 : "+policyContent.getRqutProcCn() + "\n"
+                                        +"심사발표 : "+policyContent.getJdgnPresCn() + "\n"
+                                        +"사이트 링크 주소 : "+policyContent.getRqutUrla();
+
+                                policyDao.insertAll(policy);
+                            }
+                        }
+                    }).start();
+
+
+
 
                     // 상단 알림
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SplashActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "POLICY")
-                            .setSmallIcon(R.drawable.logo2)
+                            .setSmallIcon(R.drawable.applogo)
                             .setContentTitle("YouthApp")
                             .setContentText("신규 정책이 " +newPolicy+ "개 있습니다.\n" + stringBuilder.toString())
                             .setStyle(new NotificationCompat.BigTextStyle())
